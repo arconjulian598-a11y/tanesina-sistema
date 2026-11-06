@@ -190,7 +190,55 @@ async function loadPanel() {
         return '<div class="reprow"><span>' + esc(x.servicio) + '</span><span class="bar"><i style="width:' + (x.n / max * 100) + '%"></i></span><span style="text-align:right">' + x.n + '</span></div>';
       }).join("");
   } catch (e) { toast(e.message); }
-  loadAdminRes(); loadAdminPed();
+  loadAdminRes(); loadAdminPed(); loadCatalogAdmin();
+}
+
+/* ---------- gestión de catálogo (admin) ---------- */
+function mkInput(val, ph, w, num) { var i = document.createElement("input"); i.value = val == null ? "" : val; if (ph) i.placeholder = ph; if (w) { i.style.flex = "none"; i.style.width = w; } if (num) i.type = "number"; return i; }
+function mkBtn(txt, fn, cls) { var b = document.createElement("button"); b.className = cls || "minibtn"; b.textContent = txt; b.onclick = fn; return b; }
+async function loadCatalogAdmin() {
+  try {
+    var S = await api("/servicios"); var cs = $("admServicios"); cs.innerHTML = "";
+    S.forEach(function (s) { cs.appendChild(servicioRow(s)); });
+    var P = await api("/productos"); var cp = $("admProductos"); cp.innerHTML = "";
+    P.forEach(function (p) { cp.appendChild(productoCard(p)); });
+  } catch (e) { toast(e.message); }
+}
+function servicioRow(s) {
+  var row = document.createElement("div"); row.className = "catrow";
+  var nombre = mkInput(s.nombre, "Nombre"); var precio = mkInput(s.precio, "Precio", "130px", true);
+  var lbl = document.createElement("label"); lbl.style.cssText = "display:flex;gap:.3rem;align-items:center;font-size:.8rem;font-weight:700";
+  var chk = document.createElement("input"); chk.type = "checkbox"; chk.checked = !!s.por_persona; chk.style.cssText = "width:auto;flex:none";
+  lbl.appendChild(chk); lbl.appendChild(document.createTextNode("por persona"));
+  var save = mkBtn("Guardar", async function () {
+    try { await api("/servicios/" + s.id, { method: "PATCH", body: { nombre: nombre.value, precio: Number(precio.value), por_persona: chk.checked } }); toast("Servicio actualizado"); }
+    catch (e) { toast(e.message); }
+  }, "btn sec sm");
+  row.append(nombre, precio, lbl, save); return row;
+}
+function productoCard(p) {
+  var box = document.createElement("div"); box.className = "catbox";
+  var top = document.createElement("div"); top.className = "catrow";
+  var nombre = mkInput(p.nombre, "Nombre"); var desc = mkInput(p.descripcion, "Descripción");
+  var save = mkBtn("Guardar", async function () { try { await api("/productos/" + p.id, { method: "PATCH", body: { nombre: nombre.value, descripcion: desc.value } }); toast("Producto actualizado"); } catch (e) { toast(e.message); } }, "btn sec sm");
+  var del = mkBtn("Eliminar", async function () { try { await api("/productos/" + p.id, { method: "DELETE" }); toast("Producto eliminado"); loadCatalogAdmin(); } catch (e) { toast(e.message); } });
+  top.append(nombre, desc, save, del); box.appendChild(top);
+  var vh = document.createElement("div"); vh.className = "vhead"; vh.textContent = "Presentaciones y precios"; box.appendChild(vh);
+  p.variantes.forEach(function (v) {
+    var r = document.createElement("div"); r.className = "catrow";
+    var pres = mkInput(v.presentacion, "Presentación", "140px"); var pr = mkInput(v.precio, "Precio", "120px", true); var st = mkInput(v.stock, "Stock", "100px", true);
+    var sv = mkBtn("Guardar", async function () { try { await api("/variantes/" + v.id, { method: "PATCH", body: { presentacion: pres.value, precio: Number(pr.value), stock: Number(st.value) } }); toast("Presentación actualizada"); } catch (e) { toast(e.message); } }, "btn sec sm");
+    var dl = mkBtn("✕", async function () { try { await api("/variantes/" + v.id, { method: "DELETE" }); toast("Presentación eliminada"); loadCatalogAdmin(); } catch (e) { toast(e.message); } });
+    r.append(pres, pr, st, sv, dl); box.appendChild(r);
+  });
+  var add = document.createElement("div"); add.className = "catrow";
+  var np = mkInput("", "Nueva presentación", "140px"); var npr = mkInput("", "Precio", "120px", true); var nst = mkInput("", "Stock", "100px", true);
+  var adb = mkBtn("+ Presentación", async function () {
+    if (!np.value || !npr.value) return toast("Pon presentación y precio");
+    try { await api("/productos/" + p.id + "/variantes", { method: "POST", body: { presentacion: np.value, precio: Number(npr.value), stock: Number(nst.value || 0) } }); toast("Presentación agregada"); loadCatalogAdmin(); } catch (e) { toast(e.message); }
+  }, "btn sec sm");
+  add.append(np, npr, nst, adb); box.appendChild(add);
+  return box;
 }
 function kpi(v, l, cls) { return '<div class="kpi ' + (cls || "") + '"><div class="v">' + v + '</div><div class="l">' + l + '</div></div>'; }
 async function loadAdminRes() {
@@ -247,4 +295,8 @@ function closeMenu() { if (window.innerWidth <= 900) $("links").style.display = 
 $("menuBtn").onclick = function () { var l = $("links"); l.style.display = l.style.display === "flex" ? "" : "flex"; };
 
 /* ---------- init ---------- */
+$("addProd").onclick = async function () {
+  try { await api("/productos", { method: "POST", body: { nombre: "Nuevo producto", descripcion: "" } }); toast("Producto creado, edítalo abajo"); loadCatalogAdmin(); }
+  catch (e) { toast(e.message); }
+};
 updateUI(); loadCatalogo(); renderCart();
