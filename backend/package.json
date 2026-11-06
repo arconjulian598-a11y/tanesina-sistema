@@ -1,0 +1,21 @@
+{
+  "name": "tamesina-sistema",
+  "version": "1.0.0",
+  "description": "Sistema de informacion web de Tamesina S.A.S. - Express + PostgreSQL con roles",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node -e \"require('./db-init').seed().then(()=>process.exit(0))\""
+  },
+  "dependencies": {
+    "bcryptjs": "2.4.3",
+    "cors": "2.8.5",
+    "dotenv": "16.4.5",
+    "express": "4.19.2",
+    "jsonwebtoken": "9.0.2",
+    "pg": "8.13.1"
+  }
+}

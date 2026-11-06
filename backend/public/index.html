@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tamesina · Café especial y turismo experiencial</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Mulish:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" data-nav="home">
+      <img src="/img/logo.png" alt="Tamesina">
+      <span><span class="bt">Tamesina</span><span class="bs">Café especial · Turismo experiencial</span></span>
+    </a>
+    <nav class="links" id="links">
+      <a href="#servicios" data-scroll="servicios">Servicios</a>
+      <a href="#hospedaje" data-scroll="hospedaje">Hospedaje</a>
+      <a href="#productos" data-scroll="productos">Productos</a>
+      <a href="#reservar" data-scroll="reservar">Reservar</a>
+    </nav>
+    <div class="navright">
+      <button class="icon" id="themeBtn" title="Tema" aria-label="Cambiar tema">◐</button>
+      <button class="btn sm" id="loginBtn">Ingresar</button>
+      <div class="usermenu hidden" id="userMenu">
+        <div class="avatar" id="avatar"><span class="circ" id="uinit">T</span><span id="uname">Usuario</span> ▾</div>
+        <div class="dropdown hidden" id="dropdown">
+          <div class="who"><b id="dname">Usuario</b><span id="drol">cliente</span></div>
+          <button data-act="mis">Mis reservas</button>
+          <button data-act="panel" id="panelLink">Panel de administración</button>
+          <button data-act="logout">Cerrar sesión</button>
+        </div>
+      </div>
+      <button class="icon menutoggle" id="menuBtn" aria-label="Menú">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HOME ===== -->
+<main id="view-home">
+  <section class="hero" id="inicio">
+    <img class="bg" src="/img/hero.jpg" alt="Finca cafetera de Tamesina en Támesis">
+    <div class="wrap">
+      <div class="inner">
+        <p class="eyebrow" style="color:var(--gold)">Támesis · Suroeste antioqueño</p>
+        <h1>Vive el café entre montañas, aves y naturaleza</h1>
+        <p class="lede">Hospedaje rural, tours del café y avistamiento de aves, con café especial, miel y arequipe hechos en la finca. Reserva tu experiencia en línea.</p>
+        <div class="cta">
+          <button class="btn" data-scroll="reservar">Reserva tu experiencia</button>
+          <button class="btn sec" data-scroll="servicios">Ver servicios</button>
+        </div>
+        <div class="trust">
+          <span><i></i>Café de origen</span><span><i></i>Turismo sostenible</span><span><i></i>Aves endémicas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="servicios">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Nuestros servicios</p><h2>Experiencias auténticas entre café y naturaleza</h2>
+        <p>Tres formas de vivir la finca, pensadas para desconectarse y conocer de cerca el proceso del café especial.</p></div>
+      <div class="grid g3">
+        <article class="card"><div class="ph"><img src="/img/room-doble.jpg" alt="Hospedaje"></div>
+          <div class="body"><h3>Hospedaje</h3><p class="desc">Descansa en la finca rodeado por el aroma del cafetal y el canto de las aves, con un ambiente tranquilo y familiar.</p>
+          <div class="foot"><button class="btn sm" data-scroll="hospedaje">Ver habitaciones</button></div></div></article>
+        <article class="card"><div class="ph"><img src="/img/tour.jpg" alt="Tour del café"></div>
+          <div class="body"><h3>Tour del café</h3><p class="desc">Descubre el viaje del grano desde la planta hasta tu taza: cultivo, recolección, procesamiento y un show de barismo.</p>
+          <div class="foot"><button class="btn sm" data-reservar="Tour del café">Reservar tour</button></div></div></article>
+        <article class="card"><div class="ph"><img src="/img/bird.jpg" alt="Avistamiento de aves"></div>
+          <div class="body"><h3>Avistamiento de aves</h3><p class="desc">Explora senderos naturales con guías expertos y descubre especies endémicas y migratorias del suroeste antioqueño.</p>
+          <div class="foot"><button class="btn sm" data-reservar="Avistamiento de aves">Reservar</button></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="hospedaje">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Hospedaje</p><h2>Habitaciones para descansar en la finca</h2>
+        <p>Precios por noche. Reserva en línea y te confirmamos la disponibilidad.</p></div>
+      <div class="grid g2">
+        <article class="card"><div class="ph"><img src="/img/room-doble.jpg" alt="Habitación Doble"></div>
+          <div class="body"><h3>Habitación Doble</h3><p class="desc">Espacio acogedor con vista al jardín, ideal para parejas que buscan tranquilidad y conexión con la naturaleza cafetera.</p>
+          <div class="foot"><span class="price">$120.000 <small>/ noche</small></span><button class="btn sm" data-reservar="Habitación Doble">Reservar</button></div></div></article>
+        <article class="card"><div class="ph"><img src="/img/room-suite.jpg" alt="Suite Familiar"></div>
+          <div class="body"><h3>Suite Familiar</h3><p class="desc">Amplia habitación con capacidad para cuatro personas, perfecta para familias que desean disfrutar del turismo rural sostenible.</p>
+          <div class="foot"><span class="price">$200.000 <small>/ noche</small></span><button class="btn sm" data-reservar="Suite Familiar">Reservar</button></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec band" id="productos">
+    <div class="wrap">
+      <div class="head"><p class="eyebrow">Productos</p><h2>Lleva Tamesina a casa</h2>
+        <p>Café especial en tres procesos, miel pura de abejas y arequipe de café. Agrega lo que quieras y envía tu pedido.</p></div>
+      <div class="prodgrid" id="prodgrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="reservar">
+    <div class="wrap" style="max-width:780px">
+      <div class="head"><p class="eyebrow">Reservar</p><h2>Reserva tu experiencia</h2>
+        <p>Inicia sesión como cliente, completa el formulario y recibirás un código de reserva.</p></div>
+      <div class="panel">
+        <form id="resForm" class="formgrid">
+          <label class="f">Servicio
+            <select id="r_serv" required></select></label>
+          <label class="f">Fecha<input id="r_fecha" type="date" required></label>
+          <label class="f">N.º de personas<input id="r_pers" type="number" min="1" value="2" required></label>
+          <label class="f">Teléfono / WhatsApp<input id="r_tel" inputmode="tel" placeholder="3000000000"></label>
+          <div class="full" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+            <button class="btn" type="submit">Enviar reserva</button>
+            <span class="hint">Queda en estado <b>Pendiente</b> hasta la confirmación.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== MIS RESERVAS (cliente) ===== -->
+<main id="view-mis" class="hidden">
+  <section class="sec"><div class="wrap">
+    <div class="head"><p class="eyebrow">Mi cuenta</p><h2>Mis reservas y pedidos</h2>
+      <p>Consulta el estado de lo que has reservado y pedido.</p></div>
+    <div class="panel" style="margin-bottom:1.4rem">
+      <h3 style="font-size:1.3rem;margin-bottom:1rem">Mis reservas</h3>
+      <div class="tablewrap"><table><thead><tr><th>Código</th><th>Servicio</th><th>Fecha</th><th>Pers.</th><th>Total</th><th>Estado</th></tr></thead><tbody id="misRes"></tbody></table></div>
+    </div>
+    <div class="panel">
+      <h3 style="font-size:1.3rem;margin-bottom:1rem">Mis pedidos</h3>
+      <div class="tablewrap"><table><thead><tr><th>Código</th><th>Total</th><th>Estado</th></tr></thead><tbody id="misPed"></tbody></table></div>
+    </div>
+  </div></section>
+</main>
+
+<!-- ===== PANEL (solo admin) ===== -->
+<main id="view-panel" class="hidden">
+  <section class="sec"><div class="wrap">
+    <div class="head"><p class="eyebrow">Panel de administración</p><h2>Indicadores y gestión</h2>
+      <p>Resumen del negocio, reservas y pedidos. Solo visible para la cuenta de administrador.</p></div>
+    <div class="kpis" id="kpis"></div>
+    <div class="panel" style="margin-bottom:1.4rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+        <h3 style="font-size:1.3rem">Reservas</h3>
+        <select id="filtro" style="width:auto">
+          <option value="Todas">Todas</option><option>Pendiente</option><option>Confirmada</option><option>Cancelada</option>
+        </select>
+      </div>
+      <div class="tablewrap"><table><thead><tr><th>Código</th><th>Cliente</th><th>Servicio</th><th>Fecha</th><th>Pers.</th><th>Canal</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="admRes"></tbody></table></div>
+      <div class="rep" id="rep"></div>
+    </div>
+    <div class="panel">
+      <h3 style="font-size:1.3rem;margin-bottom:1rem">Pedidos de productos</h3>
+      <div class="tablewrap"><table><thead><tr><th>Código</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="admPed"></tbody></table></div>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="margin-bottom:.7rem"><img src="/img/logo.png" alt="" style="height:46px">
+        <span><span class="bt" style="color:#fff">Tamesina</span><span class="bs" style="color:#b8ccbc">Café especial · Turismo experiencial</span></span></div>
+      <p class="muted" style="max-width:34ch">Finca de café especial y turismo rural en Támesis, Antioquia. NIT 901648076.</p>
+    </div>
+    <div><h4>Contacto</h4><p class="muted">Correo</p><p class="sel">tamesinasas@gmail.com</p>
+      <p class="muted" style="margin-top:.5rem">WhatsApp</p><p class="sel">320 531 1483</p></div>
+    <div><h4>Síguenos</h4><p><a href="https://www.instagram.com/tamesina/" target="_blank" rel="noopener">Instagram</a></p>
+      <p><a href="#reservar" data-scroll="reservar">Reservar experiencia</a></p></div>
+  </div>
+</footer>
+
+<div id="cartbar" class="hidden"><span id="cartText">0 productos</span><button class="btn" id="cartSend">Enviar pedido</button></div>
+
+<!-- Auth modal -->
+<div class="overlay hidden" id="authModal">
+  <div class="modal">
+    <button class="x" id="authX" aria-label="Cerrar">×</button>
+    <h3 id="authTitle">Iniciar sesión</h3>
+    <div class="tabs"><button id="tabLogin" class="active">Ingresar</button><button id="tabReg">Crear cuenta</button></div>
+    <div class="err hidden" id="authErr"></div>
+    <form id="loginForm" class="stack">
+      <label class="f">Correo<input id="l_email" type="email" required placeholder="correo@ejemplo.com"></label>
+      <label class="f">Contraseña<input id="l_pass" type="password" required placeholder="••••••••"></label>
+      <button class="btn block" type="submit">Ingresar</button>
+      <p class="hint" style="text-align:center">Demo — Admin: admin@tamesina.com / admin123 · Cliente: cliente@tamesina.com / cliente123</p>
+    </form>
+    <form id="regForm" class="stack hidden">
+      <label class="f">Nombre completo<input id="g_nombre" required></label>
+      <label class="f">Correo<input id="g_email" type="email" required></label>
+      <label class="f">Teléfono<input id="g_tel" inputmode="tel"></label>
+      <label class="f">Contraseña<input id="g_pass" type="password" required minlength="6"></label>
+      <button class="btn block" type="submit">Crear cuenta de cliente</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
