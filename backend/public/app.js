@@ -29,14 +29,14 @@ function showView(v) {
   if (v === "mis") loadMis();
   if (v === "panel") loadPanel();
 }
-function scrollTo(id) {
+function goSection(id) {
   showView("home");
   setTimeout(function () { var el = $(id); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 60);
 }
 document.addEventListener("click", function (e) {
-  var s = e.target.closest("[data-scroll]"); if (s) { scrollTo(s.getAttribute("data-scroll")); closeMenu(); }
+  var s = e.target.closest("[data-scroll]"); if (s) { goSection(s.getAttribute("data-scroll")); closeMenu(); }
   var r = e.target.closest("[data-reservar]"); if (r) { var sv = r.getAttribute("data-reservar");
-    if ($("r_serv")) $("r_serv").value = sv; scrollTo("reservar"); }
+    if ($("r_serv")) $("r_serv").value = sv; goSection("reservar"); }
   var n = e.target.closest("[data-nav]"); if (n) { showView(user && user.rol === "admin" ? "panel" : "home"); }
 });
 
