@@ -37,7 +37,7 @@ document.addEventListener("click", function (e) {
   var s = e.target.closest("[data-scroll]"); if (s) { scrollTo(s.getAttribute("data-scroll")); closeMenu(); }
   var r = e.target.closest("[data-reservar]"); if (r) { var sv = r.getAttribute("data-reservar");
     if ($("r_serv")) $("r_serv").value = sv; scrollTo("reservar"); }
-  var n = e.target.closest("[data-nav]"); if (n) { showView("home"); }
+  var n = e.target.closest("[data-nav]"); if (n) { showView(user && user.rol === "admin" ? "panel" : "home"); }
 });
 
 /* ---------- autenticación ---------- */
@@ -85,15 +85,21 @@ $("dropdown").addEventListener("click", function (e) {
 
 function updateUI() {
   var logged = !!token && !!user;
+  var isAdmin = logged && user.rol === "admin";
   $("loginBtn").classList.toggle("hidden", logged);
   $("userMenu").classList.toggle("hidden", !logged);
+  $("links").classList.toggle("hidden", isAdmin);       // el admin no ve el sitio del cliente
+  $("panelLink").classList.toggle("hidden", !isAdmin);  // panel solo admin
+  $("misLink").classList.toggle("hidden", isAdmin);     // "Mis reservas" es del cliente
   if (logged) {
     $("uname").textContent = user.nombre.split(" ")[0];
     $("uinit").textContent = (user.nombre[0] || "T").toUpperCase();
     $("dname").textContent = user.nombre;
-    $("drol").innerHTML = user.rol === "admin" ? '<span class="rolepill">Administrador</span>' : "Cliente";
-    $("panelLink").classList.toggle("hidden", user.rol !== "admin"); // panel solo admin
+    $("drol").innerHTML = isAdmin ? '<span class="rolepill">Administrador</span>' : "Cliente";
   }
+  if (isAdmin) showView("panel");                        // el admin entra directo a la gestión
+  else if (!$("view-panel").classList.contains("hidden")) showView("home");
+  renderCart();
 }
 
 /* ---------- catálogo ---------- */
@@ -131,7 +137,8 @@ function renderProductos() {
 function cartCount() { var t = 0; for (var k in cart) t += cart[k]; return t; }
 function cartTotal() { var t = 0; for (var k in cart) { var v = variantMap[k]; if (v) t += v.precio * cart[k]; } return t; }
 function renderCart() {
-  var n = cartCount(); $("cartbar").classList.toggle("hidden", n === 0);
+  var n = cartCount(), isAdmin = user && user.rol === "admin";
+  $("cartbar").classList.toggle("hidden", n === 0 || isAdmin); // el carrito es solo del cliente
   $("cartText").textContent = n + (n === 1 ? " producto · " : " productos · ") + money(cartTotal());
 }
 $("cartSend").onclick = async function () {
