@@ -1,0 +1,13 @@
+{
+  "name": "tamesina-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de informacion web de Tamesina S.A.S. en Cloudflare Workers + D1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.152.0"
+  }
+}

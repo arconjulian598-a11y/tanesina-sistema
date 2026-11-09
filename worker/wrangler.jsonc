@@ -1,0 +1,26 @@
+{
+  // Configuración de Cloudflare Workers para Tamesina S.A.S.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tamesina",
+  "main": "src/index.js",
+  "compatibility_date": "2025-10-01",
+  "observability": { "enabled": true },
+
+  // El frontend (HTML, CSS, JS e imágenes) se sirve como recursos estáticos.
+  // Las rutas /api/* las atiende primero el Worker.
+  "assets": {
+    "directory": "../backend/public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // Base de datos D1. Reemplaza database_id por el ID de tu base en Cloudflare.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tamesina-db",
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ]
+}

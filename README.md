@@ -71,6 +71,24 @@ Al primer arranque se crean las tablas y los datos de ejemplo automáticamente.
 
 ---
 
+## Desplegar en Cloudflare (siempre activo, no se duerme)
+
+La carpeta `worker/` tiene la misma API adaptada a **Cloudflare Workers** con base de datos **D1**.
+Sirve el mismo frontend (`backend/public`). Las tablas, los datos de ejemplo y la clave de los tokens
+se crean solos en la primera petición.
+
+1. En Cloudflare: **Storage & Databases → D1 → Create** con el nombre `tamesina-db` y copia su ID.
+2. Pega ese ID en `worker/wrangler.jsonc` (campo `database_id`) y haz push.
+3. **Workers & Pages → Create → Import a repository** → elige este repo.
+   - Nombre del proyecto: `tamesina` (igual que en `wrangler.jsonc`)
+   - Root directory: `worker`
+   - Deploy command: `npx wrangler deploy`
+4. Queda en `https://tamesina.<tu-subdominio>.workers.dev`.
+
+Probar en local: `cd worker && npm install && npx wrangler dev`
+
+---
+
 ## Roles y permisos
 - **cliente:** registrarse/iniciar sesión, reservar, pedir productos, ver *Mis reservas y pedidos*.
 - **admin:** todo lo anterior más el panel con estadísticas, cambiar el estado de reservas/pedidos y eliminar reservas.
