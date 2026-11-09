@@ -1,0 +1,22 @@
+{
+  // Configuración de Cloudflare Workers (desde la raíz del repo).
+  // Equivale a worker/wrangler.jsonc, con rutas relativas a la raíz.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tamesina",
+  "main": "worker/src/index.js",
+  "compatibility_date": "2025-10-01",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "backend/public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tamesina-db",
+      "database_id": "1da90c6f-1723-4c25-8afb-250c02f28428"
+    }
+  ]
+}
